@@ -17,7 +17,32 @@ app.post('/add', (req, res) => {
     const { name, link, image } = req.body;
     const singer = new Singer(name, link, image);
     singers.push(singer);
-    // res.send('Da nhan');
+    res.redirect('/');
+});
+
+app.get('/update/:id', (req, res) => {
+    const { id } = req.params;
+    const singer = singers.find(singer => singer.id === +id);
+    if (!singer) return res.send('Khong tim thay.');
+    res.render('update', { singer });
+});
+
+app.post('/update/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, image, link } = req.body;
+    const singer = singers.find(singer => singer.id === +id);
+    if (!singer) return res.send('Khong tim thay.');
+    singer.name = name;
+    singer.link = link;
+    singer.image = image;
+    res.redirect('/');
+});
+
+app.get('/remove/:id', (req, res) => {
+    const { id } = req.params;
+    const index = singers.findIndex(singer => singer.id === +id);
+    if (index === -1) return res.send('Khong tim thay.');
+    singers.splice(index, 1);
     res.redirect('/');
 });
 
