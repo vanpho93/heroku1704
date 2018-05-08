@@ -7,20 +7,9 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => res.render('index'));
+app.get('/', (req, res) => res.render('singer'));
 
-app.get('/add', (req, res) => res.render('add'));
-
-app.post('/add', (req, res) => {
-    console.log(req.body);
-    res.send('Da nhan.');
-});
-// app.post('/', (req, res) => {
-//     console.log(req.body);
-//     res.send('POST METHOD');
-// });
-// app.put('/', (req, res) => res.send('PUT METHOD'));
-// app.delete('/', (req, res) => res.send('DELETE METHOD'));
+app.get('/add', (req, res) => res.render('create'));
 
 app.listen(process.env.PORT || 3000, () => console.log('Server started!'));
 
